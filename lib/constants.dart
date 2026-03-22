@@ -24,6 +24,10 @@ class AppConstants {
   /// Default terminal theme name.
   static const String defaultTerminalTheme = 'Default Dark';
 
+  // -- Layout Breakpoints --
+  /// Width below which compact layout (bottom nav) is used.
+  static const double compactBreakpoint = 600.0;
+
   // -- Sessions --
   /// Maximum concurrent SSH sessions.
   static const int maxSessions = 4;

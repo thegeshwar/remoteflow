@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:remoteflow/constants.dart';
 import 'package:remoteflow/features/connection/connection_screen.dart';
 import 'package:remoteflow/theme/app_theme.dart';
+import 'package:remoteflow/widgets/adaptive_shell.dart';
 
 void main() {
   runApp(const RemoteFlowApp());
@@ -20,7 +21,30 @@ class RemoteFlowApp extends StatelessWidget {
       theme: AppTheme.light(),
       darkTheme: AppTheme.dark(),
       themeMode: ThemeMode.dark,
-      home: const ConnectionScreen(),
+      home: AdaptiveShell(
+        pages: [
+          const ConnectionScreen(),
+          const _PlaceholderPage(title: 'Sessions'),
+          const _PlaceholderPage(title: 'Settings'),
+        ],
+      ),
+    );
+  }
+}
+
+/// Temporary placeholder page until feature screens are built.
+class _PlaceholderPage extends StatelessWidget {
+  const _PlaceholderPage({required this.title});
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text(
+        title,
+        style: Theme.of(context).textTheme.headlineMedium,
+      ),
     );
   }
 }
