@@ -31,6 +31,16 @@ class AppConstants {
   static const Color successColor = Color(0xFFA6E3A1);
   static const Color warningColor = Color(0xFFFAB387);
 
+  // -- Android Build Config --
+  /// Android target SDK version (Play Store requirement).
+  static const int androidTargetSdk = 35;
+
+  /// Android minimum SDK version.
+  static const int androidMinSdk = 23;
+
+  /// Android compile SDK version.
+  static const int androidCompileSdk = 35;
+
   // -- Hive Box Names --
   static const String hostsBoxName = 'hosts';
   static const String settingsBoxName = 'settings';

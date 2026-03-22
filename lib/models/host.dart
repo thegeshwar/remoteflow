@@ -1,5 +1,3 @@
-import 'package:hive/hive.dart';
-
 /// Supported SSH authentication methods.
 enum AuthMethod {
   /// Authenticate with a password.

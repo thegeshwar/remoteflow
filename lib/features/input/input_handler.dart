@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:flutter/services.dart';
 
 /// Handles keyboard and mouse input forwarding to SSH sessions.
