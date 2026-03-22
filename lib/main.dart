@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:remoteflow/constants.dart';
 import 'package:remoteflow/features/connection/connection_screen.dart';
+import 'package:remoteflow/theme/app_theme.dart';
 
 void main() {
   runApp(const RemoteFlowApp());
@@ -16,16 +17,9 @@ class RemoteFlowApp extends StatelessWidget {
     return MaterialApp(
       title: AppConstants.appName,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        scaffoldBackgroundColor: AppConstants.surfaceColor,
-        colorScheme: const ColorScheme.dark(
-          primary: AppConstants.accentColor,
-          surface: AppConstants.surfaceColor,
-          error: AppConstants.errorColor,
-        ),
-        fontFamily: 'monospace',
-      ),
+      theme: AppTheme.light(),
+      darkTheme: AppTheme.dark(),
+      themeMode: ThemeMode.dark,
       home: const ConnectionScreen(),
     );
   }

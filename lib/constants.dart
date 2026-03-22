@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 /// Application-wide constants for RemoteFlow.
 class AppConstants {
   AppConstants._();
@@ -15,21 +13,20 @@ class AppConstants {
   // -- Terminal --
   static const int defaultScrollbackLines = 10000;
   static const double defaultFontSize = 14.0;
-  static const String defaultFontFamily = 'monospace';
+
+  /// Default terminal font family (matches bundled asset).
+  static const String defaultTerminalFontFamily = 'JetBrainsMono';
 
   // -- Scroll Intent --
   /// Distance from bottom (in pixels) within which auto-scroll resumes.
   static const double scrollBottomThreshold = 50.0;
 
-  // -- Theme Colors --
-  static const Color primaryColor = Color(0xFF1E1E2E);
-  static const Color surfaceColor = Color(0xFF181825);
-  static const Color accentColor = Color(0xFF89B4FA);
-  static const Color terminalBackground = Color(0xFF11111B);
-  static const Color terminalForeground = Color(0xFFCDD6F4);
-  static const Color errorColor = Color(0xFFF38BA8);
-  static const Color successColor = Color(0xFFA6E3A1);
-  static const Color warningColor = Color(0xFFFAB387);
+  /// Default terminal theme name.
+  static const String defaultTerminalTheme = 'Default Dark';
+
+  // -- Sessions --
+  /// Maximum concurrent SSH sessions.
+  static const int maxSessions = 4;
 
   // -- Android Build Config --
   /// Android target SDK version (Play Store requirement).
