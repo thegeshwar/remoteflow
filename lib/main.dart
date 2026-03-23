@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:remoteflow/constants.dart';
 import 'package:remoteflow/features/connection/connection_screen.dart';
+import 'package:remoteflow/features/dashboard/dashboard_screen.dart';
 import 'package:remoteflow/theme/app_theme.dart';
 import 'package:remoteflow/widgets/adaptive_shell.dart';
 
@@ -24,7 +25,7 @@ class RemoteFlowApp extends StatelessWidget {
       home: AdaptiveShell(
         pages: [
           const ConnectionScreen(),
-          const _PlaceholderPage(title: 'Sessions'),
+          const DashboardScreen(),
           const _PlaceholderPage(title: 'Settings'),
         ],
       ),
