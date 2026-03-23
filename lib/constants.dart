@@ -45,6 +45,11 @@ class AppConstants {
   /// Android compile SDK version.
   static const int androidCompileSdk = 35;
 
+  // -- URLs --
+  /// Privacy policy URL (hosted via GitHub Pages).
+  static const String privacyPolicyUrl =
+      'https://thegeshwar.github.io/remoteflow/privacy-policy.html';
+
   // -- Hive Box Names --
   static const String hostsBoxName = 'hosts';
   static const String settingsBoxName = 'settings';
