@@ -24,13 +24,17 @@ class NewOutputBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
+    final reduceMotion = MediaQuery.of(context).disableAnimations;
     return AnimatedOpacity(
       opacity: visible ? 1.0 : 0.0,
-      duration: const Duration(milliseconds: 200),
+      duration: reduceMotion ? Duration.zero : const Duration(milliseconds: 200),
       child: IgnorePointer(
         ignoring: !visible,
-        child: GestureDetector(
-          onTap: onTap,
+        child: Semantics(
+          label: 'New output below, tap to scroll to bottom',
+          button: true,
+          child: GestureDetector(
+            onTap: onTap,
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             constraints: const BoxConstraints(
@@ -65,6 +69,7 @@ class NewOutputBadge extends StatelessWidget {
               ],
             ),
           ),
+        ),
         ),
       ),
     );
