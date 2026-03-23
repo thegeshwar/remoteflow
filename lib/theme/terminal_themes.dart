@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:xterm/xterm.dart' as xterm;
 
 /// A named terminal color theme, independent of the system theme.
 ///
 /// Terminal themes define foreground, background, cursor, and the 16 ANSI
 /// colors used by xterm.dart for rendering terminal output.
-class TerminalTheme {
-  /// Creates a [TerminalTheme].
-  const TerminalTheme({
+class AppTerminalTheme {
+  /// Creates an [AppTerminalTheme].
+  const AppTerminalTheme({
     required this.name,
     required this.foreground,
     required this.background,
@@ -33,6 +34,35 @@ class TerminalTheme {
   /// The 16 ANSI colors: black, red, green, yellow, blue, magenta, cyan,
   /// white, then their bright variants in the same order.
   final List<Color> ansiColors;
+
+  /// Converts this theme to an xterm.dart [xterm.TerminalTheme].
+  xterm.TerminalTheme toXtermTheme() {
+    return xterm.TerminalTheme(
+      cursor: cursor,
+      selection: selection,
+      foreground: foreground,
+      background: background,
+      black: ansiColors[0],
+      red: ansiColors[1],
+      green: ansiColors[2],
+      yellow: ansiColors[3],
+      blue: ansiColors[4],
+      magenta: ansiColors[5],
+      cyan: ansiColors[6],
+      white: ansiColors[7],
+      brightBlack: ansiColors[8],
+      brightRed: ansiColors[9],
+      brightGreen: ansiColors[10],
+      brightYellow: ansiColors[11],
+      brightBlue: ansiColors[12],
+      brightMagenta: ansiColors[13],
+      brightCyan: ansiColors[14],
+      brightWhite: ansiColors[15],
+      searchHitBackground: selection,
+      searchHitBackgroundCurrent: cursor,
+      searchHitForeground: foreground,
+    );
+  }
 }
 
 /// Built-in terminal color themes.
@@ -42,7 +72,7 @@ class TerminalThemes {
   TerminalThemes._();
 
   /// Default dark terminal theme (Catppuccin Mocha inspired).
-  static const TerminalTheme defaultDark = TerminalTheme(
+  static const AppTerminalTheme defaultDark = AppTerminalTheme(
     name: 'Default Dark',
     foreground: Color(0xFFCDD6F4),
     background: Color(0xFF11111B),
@@ -69,7 +99,7 @@ class TerminalThemes {
   );
 
   /// Dracula terminal theme.
-  static const TerminalTheme dracula = TerminalTheme(
+  static const AppTerminalTheme dracula = AppTerminalTheme(
     name: 'Dracula',
     foreground: Color(0xFFF8F8F2),
     background: Color(0xFF282A36),
@@ -96,7 +126,7 @@ class TerminalThemes {
   );
 
   /// Solarized Dark terminal theme.
-  static const TerminalTheme solarizedDark = TerminalTheme(
+  static const AppTerminalTheme solarizedDark = AppTerminalTheme(
     name: 'Solarized Dark',
     foreground: Color(0xFF839496),
     background: Color(0xFF002B36),
@@ -123,7 +153,7 @@ class TerminalThemes {
   );
 
   /// Monokai terminal theme.
-  static const TerminalTheme monokai = TerminalTheme(
+  static const AppTerminalTheme monokai = AppTerminalTheme(
     name: 'Monokai',
     foreground: Color(0xFFF8F8F2),
     background: Color(0xFF272822),
@@ -150,7 +180,7 @@ class TerminalThemes {
   );
 
   /// All available terminal themes.
-  static const List<TerminalTheme> all = [
+  static const List<AppTerminalTheme> all = [
     defaultDark,
     dracula,
     solarizedDark,
@@ -158,7 +188,7 @@ class TerminalThemes {
   ];
 
   /// Finds a terminal theme by name, returns [defaultDark] if not found.
-  static TerminalTheme byName(String name) {
+  static AppTerminalTheme byName(String name) {
     return all.firstWhere(
       (theme) => theme.name == name,
       orElse: () => defaultDark,
