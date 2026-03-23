@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:remoteflow/constants.dart';
 import 'package:remoteflow/models/session.dart';
 import 'package:remoteflow/services/ssh_service.dart';
+import 'package:remoteflow/theme/app_theme.dart';
 
 /// Dashboard screen showing active SSH sessions as live preview cards.
 ///
@@ -33,14 +34,35 @@ class DashboardScreenState extends State<DashboardScreen> {
       return _buildEmptyState(context);
     }
 
+    final canCreate = widget.sshService?.canCreateSession ?? true;
+
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Sessions',
-            style: Theme.of(context).textTheme.headlineMedium,
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  'Sessions (${sessionEntries.length}/${AppConstants.maxSessions})',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+              ),
+              IconButton(
+                onPressed: canCreate ? _onNewSession : null,
+                icon: const Icon(Icons.add),
+                tooltip: canCreate
+                    ? 'New session'
+                    : 'Session limit reached (${AppConstants.maxSessions})',
+                style: IconButton.styleFrom(
+                  minimumSize: const Size(
+                    AppTheme.minTouchTarget,
+                    AppTheme.minTouchTarget,
+                  ),
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 16),
           Expanded(
@@ -126,6 +148,7 @@ class DashboardScreenState extends State<DashboardScreen> {
         clipBehavior: Clip.antiAlias,
         child: InkWell(
           onTap: isConnected ? () => _onSessionTap(entry.key) : null,
+          onLongPress: () => _onCloseSession(entry.key),
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -198,5 +221,42 @@ class DashboardScreenState extends State<DashboardScreen> {
 
   void _onSessionTap(String sessionId) {
     // TODO: Navigate to terminal screen (already built)
+  }
+
+  void _onNewSession() {
+    // TODO: Show host picker to create new session
+  }
+
+  /// Closes a session after confirmation.
+  Future<void> _onCloseSession(String sessionId) async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Close Session'),
+        content: const Text(
+          'Disconnect and close this session?',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: Text(
+              'Close',
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.error,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed == true) {
+      await widget.sshService?.disconnect(sessionId);
+      if (mounted) setState(() {});
+    }
   }
 }

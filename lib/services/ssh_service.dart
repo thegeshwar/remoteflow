@@ -65,17 +65,28 @@ class SSHService {
   /// Returns the [ActiveConnection] for a session, or null.
   ActiveConnection? getConnection(String sessionId) => _connections[sessionId];
 
+  /// Whether more sessions can be created.
+  bool get canCreateSession => activeCount < AppConstants.maxSessions;
+
   /// Establishes an SSH connection to the given [host] with [credentials].
   ///
   /// Creates an SSH client, authenticates, opens a shell session,
   /// and wires up a Terminal instance.
   ///
+  /// Throws [StateError] if the max session limit is reached.
   /// Throws [SSHAuthFailError] if authentication fails.
   /// Throws [SocketException] if the host is unreachable.
   Future<ActiveConnection> connect(
     Host host,
     HostCredentials credentials,
   ) async {
+    if (!canCreateSession) {
+      throw StateError(
+        'Maximum session limit (${AppConstants.maxSessions}) reached. '
+        'Close an existing session before opening a new one.',
+      );
+    }
+
     final sessionId =
         '${host.id}_${DateTime.now().millisecondsSinceEpoch}';
     final session = Session(
