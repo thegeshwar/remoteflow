@@ -28,6 +28,9 @@ class AppConstants {
   /// Width below which compact layout (bottom nav) is used.
   static const double compactBreakpoint = 600.0;
 
+  /// Width above which expanded layout is used.
+  static const double expandedBreakpoint = 840.0;
+
   // -- Sessions --
   /// Maximum concurrent SSH sessions.
   static const int maxSessions = 4;
