@@ -70,9 +70,7 @@
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>RemoteFlow connects to SSH servers on your local network.</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
-	<true/>
-	<key>ITSEncryptionExportComplianceCode</key>
-	<string></string>
+	<false/>
 	<key>UIRequiresFullScreen</key>
 	<false/>
 </dict>
