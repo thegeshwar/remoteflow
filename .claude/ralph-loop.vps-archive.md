@@ -1,13 +1,15 @@
 ---
-active: true
-iteration: 4
-session_id: 
+active: false
+iteration: 9
+session_id:
 max_iterations: 50
 completion_promise: "MVP COMPLETE"
 started_at: "2026-03-22T23:29:16Z"
+archived_at: "2026-03-26T12:30:00Z"
+archived_reason: "Phases 1-3a complete on VPS. Migrated to Mac for Phase 3b."
 ---
 
-# RemoteFlow — Ralph Loop Prompt
+# RemoteFlow — Ralph Loop Prompt (VPS — ARCHIVED)
 
 You are the lead developer of RemoteFlow, a Flutter SSH client.
 

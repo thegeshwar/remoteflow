@@ -105,9 +105,22 @@ These rules are NOT optional. Apply them to every widget, every screen, every in
 - Programmatic scrolls and content growth MUST NOT trigger onUserScrollUp()
 - Listen to Terminal.onOutput for new content detection
 
-## Known Issues
-- No Mac available yet — iOS/macOS builds deferred (issues labeled `needs-mac`)
+## Development Environment
+- **Mac is now available** — MacBook Air (Apple Silicon, macOS)
+- Development has moved from VPS (`oracle` / 137.131.23.113) to local Mac
+- Phase 3b (Mac-dependent issues #30–#35) is now unblocked
 - GitHub Project board: https://github.com/users/thegeshwar/projects/4
+
+## Phase 3b — Current Work (Mac-Dependent)
+All non-Mac work (Phases 1–3a) is complete: 22 issues closed, 306 tests passing, 0 warnings.
+
+Open issues:
+- **#30 (F-23)**: Mac environment setup — Xcode, Flutter, CocoaPods, free Apple ID signing
+- **#31 (F-24)**: iOS platform config — Info.plist, PrivacyInfo.xcprivacy, LaunchScreen, entitlements
+- **#32 (F-25)**: iOS/iPad testing — safe areas, multitasking, orientations, IPv6 NAT64
+- **#33 (F-26)**: macOS desktop build — verify compilation, window management
+- **#34 (F-27)**: App icons — 1024x1024, 512x512, feature graphic, launch screen
+- **#35 (F-28)**: Store listing assets — screenshots, descriptions, export compliance
 
 ## Design Spec
 Full spec: docs/superpowers/specs/2026-03-22-remoteflow-mvp-design.md
